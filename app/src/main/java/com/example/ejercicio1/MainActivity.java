@@ -1,7 +1,10 @@
 package com.example.ejercicio1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         buttonBackUp = (Button) findViewById(R.id.buttonBackup);
         buttonBackUp.setOnClickListener(this);
-
     }
 
     @Override
@@ -36,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public class  AsynTaskClass extends AsyncTask<Void,Integer,Boolean>{
 
         ProgressDialog progressDialog;
-
         @Override
         protected Boolean doInBackground(Void... voids) {
             for (int i = 1; i <= 10 && !isCancelled(); i++) {
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 progressDialog.setProgress(i*10);
             }
-            progressDialog.dismiss();
             return true;
         }
 
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
             if(aBoolean) Toast.makeText(getApplicationContext(),"Tarea finalizada ",Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         }
 
         @Override
